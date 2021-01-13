@@ -1,9 +1,7 @@
-- student class is in new file
-- added output menu procedure
-- added a view class function 
-- added create class function 
-- changed classa array into a list
-- changed name in student class to private
-- changed age in student class to private 
-- added a class name list 
-- added a class list 
+- Removed the index of the class from outputing to the user 
+- added viewStudent function 
+- added viewStudent to menu 
+- added exit option 
+- added a default case on menu 
+- added remove student function
+- added addStudent Function

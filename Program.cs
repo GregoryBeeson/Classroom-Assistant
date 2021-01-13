@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading;
 
@@ -23,16 +24,22 @@ namespace Classroom_Assistant
                         viewClass();
                         break;
                     case 2:
-                        Console.WriteLine("To be added");
+                        viewStudent();
                         break;
                     case 3:
-                        Console.WriteLine("To be added");
+                        removeStudent();
                         break;
                     case 4:
-                        Console.WriteLine("To be added");
+                        addStudent();
                         break;
                     case 5:
                         addClass();
+                        break;
+                    case 6:
+                        System.Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Error, please enter a valid option");
                         break;
                 }
 
@@ -47,6 +54,7 @@ namespace Classroom_Assistant
             Console.WriteLine("3. Remove Student");
             Console.WriteLine("4. Add Student");
             Console.WriteLine("5. Add Class");
+            Console.WriteLine("6. Exit");
         }
 
         static void addClass()
@@ -80,15 +88,99 @@ namespace Classroom_Assistant
             int index;
             Console.WriteLine("Please enter the classes name");
             classname = Console.ReadLine();
-            Console.WriteLine(ClassList.IndexOf(classname));
             index = ClassList.IndexOf(classname);
             foreach(var item in Classes[index])
             {
                 Console.WriteLine("Name {0}", item.returnName());
                 Console.WriteLine("Age {0}", item.returnAge());
-
             }
 
+
+        }
+
+        static void viewStudent()
+        {
+            string className;
+            string studentName;
+            int index;
+            bool found = false;
+            string repeat;
+
+            Console.WriteLine("Please enter the classes name");
+            className = Console.ReadLine();
+            Console.WriteLine("Please enter students name");
+            studentName = Console.ReadLine();
+            index = ClassList.IndexOf(className);
+            foreach (var item in Classes[index])
+            {
+                if(studentName == item.returnName())
+                {
+                    Console.WriteLine("Name: {0}", item.returnName());
+                    Console.WriteLine("Age: {0}", item.returnAge());
+                    found = true;
+                }
+            }
+            if(found != true)
+            {
+                Console.WriteLine("Student can not be found. Would you like to try again? Y/N");
+                repeat = Console.ReadLine();
+                if (repeat == "Y")
+                    viewStudent();
+            }
+        }
+
+        static void removeStudent()
+        { 
+            string className;
+            string studentName;
+            int index;
+            bool found = false;
+            string repeat;
+            int indexOfStudent = 0;
+            int count = 0;
+
+            Console.WriteLine("Please enter the classes name");
+            className = Console.ReadLine();
+            Console.WriteLine("Please enter students name you would like to remove");
+            studentName = Console.ReadLine();
+            index = ClassList.IndexOf(className);
+            foreach(var item in Classes[index])
+            {
+                if(studentName == item.returnName())
+                {
+                    indexOfStudent = count;
+                    found = true;
+                }
+                count = count + 1;
+            }
+            if (found == true)
+                Classes[index].RemoveAt(indexOfStudent);
+            else if (found != true)
+            {
+                Console.WriteLine("Student can not be found. Would you like to try again? Y/N");
+                repeat = Console.ReadLine();
+                if (repeat == "Y")
+                    removeStudent();
+            }
+        }
+
+        static void addStudent()
+        {
+
+            string className;
+            int index;
+
+
+            Console.WriteLine("Please enter the classes name");
+            className = Console.ReadLine();
+            index = ClassList.IndexOf(className);
+            student newClassMember = new student();
+
+            Console.WriteLine("Please Enter the students name");
+            newClassMember.setName(Console.ReadLine());
+            Console.WriteLine("Please enter the Students Age");
+            newClassMember.setAge(Convert.ToInt32(Console.ReadLine()));
+            Classes[index].Add(newClassMember);
 
         }
 

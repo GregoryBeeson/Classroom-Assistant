@@ -60,13 +60,19 @@ namespace Classroom_Assistant
         static void addClass()
         {
             int classize = 1;
-            string ClassName = "";
+            string className = "";
+            bool success = false;
             Console.WriteLine("Please enter Class Name");
-            ClassName = Console.ReadLine();
+            className = Console.ReadLine();
             Console.WriteLine("Please enter class size");
-            classize = Convert.ToInt32(Console.ReadLine());
+            do { 
+                try { 
+                    classize = Convert.ToInt32(Console.ReadLine()); 
+                    success = true; 
+                } catch
+                { Console.WriteLine("Please enter a valid option"); } } while (!success);
 
-            List<student> classa = new List<student>();
+            List < student > classa = new List<student>();
 
             for (int I = 0; I < classize; I++)
             {
@@ -77,19 +83,32 @@ namespace Classroom_Assistant
                 classa[I].setAge(Convert.ToInt32(Console.ReadLine()));
             }
 
-            ClassList.Add(ClassName);
+            ClassList.Add(className);
             Classes.Add(classa);
 
             
         }
         static void viewClass()
         {
-            string classname;
-            int index;
-            Console.WriteLine("Please enter the classes name");
-            classname = Console.ReadLine();
-            index = ClassList.IndexOf(classname);
-            foreach(var item in Classes[index])
+            string className = "";
+            int index = -1;
+            bool success = false;
+
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Please enter the classes name");
+                    className = Console.ReadLine();
+                    index = ClassList.IndexOf(className);
+                    success = true;
+                }
+                catch { Console.WriteLine("Invalid Class Name"); }
+            } while (!success);
+
+
+
+            foreach (var item in Classes[index])
             {
                 Console.WriteLine("Name {0}", item.returnName());
                 Console.WriteLine("Age {0}", item.returnAge());
@@ -100,16 +119,27 @@ namespace Classroom_Assistant
 
         static void viewStudent()
         {
-            string className;
-            string studentName;
+            string className = "";
+            string studentName = "";
             int index;
             bool found = false;
             string repeat;
+            bool success = false;
 
-            Console.WriteLine("Please enter the classes name");
-            className = Console.ReadLine();
             Console.WriteLine("Please enter students name");
             studentName = Console.ReadLine();
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Please enter the classes name");
+                    className = Console.ReadLine();
+                    index = ClassList.IndexOf(className);
+                    success = true;
+                }
+                catch { Console.WriteLine("Invalid Class Name"); }
+            } while (!success);
+
             index = ClassList.IndexOf(className);
             foreach (var item in Classes[index])
             {
@@ -131,20 +161,30 @@ namespace Classroom_Assistant
 
         static void removeStudent()
         { 
-            string className;
-            string studentName;
-            int index;
+            string className = "";
+            string studentName = "";
+            int index = -1;
             bool found = false;
             string repeat;
             int indexOfStudent = 0;
             int count = 0;
+            bool success = false;
 
-            Console.WriteLine("Please enter the classes name");
-            className = Console.ReadLine();
             Console.WriteLine("Please enter students name you would like to remove");
             studentName = Console.ReadLine();
-            index = ClassList.IndexOf(className);
-            foreach(var item in Classes[index])
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Please enter the classes name");
+                    className = Console.ReadLine();
+                    index = ClassList.IndexOf(className);
+                    success = true;
+                }
+                catch { Console.WriteLine("Invalid Class Name"); }
+            } while (!success);
+
+            foreach (var item in Classes[index])
             {
                 if(studentName == item.returnName())
                 {
@@ -167,15 +207,24 @@ namespace Classroom_Assistant
         static void addStudent()
         {
 
-            string className;
-            int index;
+            string className = "";
+            int index = 0;
+            bool success = false;
 
+            
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Please enter the classes name");
+                    className = Console.ReadLine();
+                    index = ClassList.IndexOf(className);
+                    success = true;
+                }
+                catch { Console.WriteLine("Invalid Class Name"); }
+            } while (!success);
 
-            Console.WriteLine("Please enter the classes name");
-            className = Console.ReadLine();
-            index = ClassList.IndexOf(className);
             student newClassMember = new student();
-
             Console.WriteLine("Please Enter the students name");
             newClassMember.setName(Console.ReadLine());
             Console.WriteLine("Please enter the Students Age");

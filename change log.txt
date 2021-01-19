@@ -1,7 +1,2 @@
-- Removed the index of the class from outputing to the user 
-- added viewStudent function 
-- added viewStudent to menu 
-- added exit option 
-- added a default case on menu 
-- added remove student function
-- added addStudent Function
+- error handling added
+- change in variable names making them more uniform 

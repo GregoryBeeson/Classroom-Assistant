@@ -8,10 +8,14 @@ namespace Classroom_Assistant
 {
     class Program
     {
+
+        //Stores the class names in the same index value as the classes in Classes list.
         public static List<string> ClassList = new List<string>();
         public static List<List<student>> Classes = new List<List<student>>();
+
         static void Main(string[] args)
         {
+            //Creates a loop so users dont leave the program without choosing
             do
             {
                 int menuoption;
@@ -46,6 +50,7 @@ namespace Classroom_Assistant
             } while (true);
 
         }
+        //Outputs the menu for users
         static void outputMenu()
         {
             Console.WriteLine("Menu");
@@ -70,9 +75,12 @@ namespace Classroom_Assistant
                     classize = Convert.ToInt32(Console.ReadLine()); 
                     success = true; 
                 } catch
-                { Console.WriteLine("Please enter a valid option"); } } while (!success);
+                { Console.WriteLine("Please enter a valid option"); } 
+            } while (!success);
 
-            List < student > classa = new List<student>();
+
+            //created in loop as there may be mutiple students being added to the class
+            List<student> classa = new List<student>();
 
             for (int I = 0; I < classize; I++)
             {
@@ -100,6 +108,7 @@ namespace Classroom_Assistant
                 {
                     Console.WriteLine("Please enter the classes name");
                     className = Console.ReadLine();
+                    //gets index from classList to find class in Classes list
                     index = ClassList.IndexOf(className);
                     success = true;
                 }
@@ -107,7 +116,7 @@ namespace Classroom_Assistant
             } while (!success);
 
 
-
+            //Outputs whole class
             foreach (var item in Classes[index])
             {
                 Console.WriteLine("Name {0}", item.returnName());
@@ -143,6 +152,7 @@ namespace Classroom_Assistant
             index = ClassList.IndexOf(className);
             foreach (var item in Classes[index])
             {
+                //goes through each member of the class until the correct class member is found
                 if(studentName == item.returnName())
                 {
                     Console.WriteLine("Name: {0}", item.returnName());
@@ -150,6 +160,7 @@ namespace Classroom_Assistant
                     found = true;
                 }
             }
+
             if(found != true)
             {
                 Console.WriteLine("Student can not be found. Would you like to try again? Y/N");
@@ -186,6 +197,7 @@ namespace Classroom_Assistant
 
             foreach (var item in Classes[index])
             {
+                //student cannot be remove while in the list removed after loop has finished 
                 if(studentName == item.returnName())
                 {
                     indexOfStudent = count;

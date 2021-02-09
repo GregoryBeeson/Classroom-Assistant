@@ -1,9 +1,0 @@
-- Teacher class added 
-- check admin function added 
-- diffrent menu options for admin 
-- login added 
-- add teacher option 
-- remove teacher 
-- example normal account added
-- example admin account added 
-- list teacher function added

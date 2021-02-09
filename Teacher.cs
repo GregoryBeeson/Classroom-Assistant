@@ -19,6 +19,7 @@ namespace Classroom_Assistant
                 this.username = username;
                 this.password = password;
                 this.admin = admin;
+                teachersClasses.Add("");
         }
             
 
@@ -32,6 +33,29 @@ namespace Classroom_Assistant
             {
                 return false;
             }
+        }
+
+        public void addTeacherClass(string classname)
+        {
+            teachersClasses.Add(classname);
+        }
+
+        public void removeTeacherClass(string classname)
+        {
+            teachersClasses.Remove(classname);
+        }
+
+        public bool accessClass(string classname)
+        {
+            bool access = false;
+
+            foreach(var item in teachersClasses)
+            {
+                if (item == classname)
+                    access = true;
+            }
+            return access;
+
         }
     }
 }

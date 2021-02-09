@@ -18,123 +18,129 @@ namespace Classroom_Assistant
 
         static void Main(string[] args)
         {
-
-            Teacher example = new Teacher();
-            example.setupTeacher("Susan", "susan01", "susanpassword", false);
-            Teachers.Add(example);
-
             Teacher exampleAdmin = new Teacher();
             exampleAdmin.setupTeacher("Greg", "admin", "admin", true);
             Teachers.Add(exampleAdmin);
 
             do
             {
-                string username = "";
-                string password = "";
-                int ListSize = -1;
-                bool found = false;
 
-                Console.WriteLine("Please Enter Username");
-                username = Console.ReadLine();
-                Console.WriteLine("Please Enter Password");
-                password = Console.ReadLine();
 
-                ListSize = Teachers.Count();
-                for (int I = 0; ListSize > I; I++)
+                do
                 {
-                    if (Teachers[I].Login(username, password) == true)
-                    {
-                        LoggedIndex = I;
-                        found = true;
-                        loggedin = true;
-                    }
-                }
-                if(found != true)
-                 Console.WriteLine("Username or Password was incorrect");
-            } while (loggedin == false);
+                    string username = "";
+                    string password = "";
+                    int ListSize = -1;
+                    bool found = false;
 
-            //Creates a loop so users dont leave the program without choosing
-            do
-            {
-                if (checkAdmin() == false)
-                {
-                    int menuoption = -1;
-                    outputMenuNormalUser();
-                    Console.WriteLine("Please choose an option:");
-                    menuoption = Convert.ToInt32(Console.ReadLine());
-                    switch (menuoption)
+                    Console.WriteLine("Please Enter Username");
+                    username = Console.ReadLine();
+                    Console.WriteLine("Please Enter Password");
+                    password = Console.ReadLine();
+
+                    ListSize = Teachers.Count();
+                    for (int I = 0; ListSize > I; I++)
                     {
-                        case 1:
-                            viewClass();
-                            break;
-                        case 2:
-                            viewStudent();
-                            break;
-                        case 3:
-                            removeStudent();
-                            break;
-                        case 4:
-                            addStudent();
-                            break;
-                        case 5:
-                            addClass();
-                            break;
-                        case 6:
-                            listTeachers();
-                            break;
-                        case 7:
-                            Console.WriteLine("Goodbye, {0}", Teachers[LoggedIndex].teacherName);
-                            System.Environment.Exit(0);
-                            break;
-                        default:
-                            Console.WriteLine("Error, please enter a valid option");
-                            break;
+                        if (Teachers[I].Login(username, password) == true)
+                        {
+                            LoggedIndex = I;
+                            found = true;
+                            loggedin = true;
+                        }
                     }
-                }
-                else if (checkAdmin() == true)
+                    if (found != true)
+                        Console.WriteLine("Username or Password was incorrect");
+                } while (loggedin == false);
+
+                //Creates a loop so users dont leave the program without choosing
+                do
                 {
-                    int menuoption = -1;
-                    outputMenuAdminUser();
-                    Console.WriteLine("Please choose an option:");
-                    menuoption = Convert.ToInt32(Console.ReadLine());
-                    switch (menuoption)
+                    if (checkAdmin() == false)
                     {
-                        case 1:
-                            viewClass();
-                            break;
-                        case 2:
-                            viewStudent();
-                            break;
-                        case 3:
-                            removeStudent();
-                            break;
-                        case 4:
-                            addStudent();
-                            break;
-                        case 5:
-                            addClass();
-                            break;
-                        case 6:
-                            addTeacher();
-                            break;
-                        case 7:
-                            removeTeacher();
-                            break;
-                        case 8:
-                            listTeachers();
-                            break;
-                        case 9:
-                            Console.WriteLine("Goodbye, {0}", Teachers[LoggedIndex].teacherName);
-                            System.Environment.Exit(0);
-                            break;
-                        default:
-                            Console.WriteLine("Error, please enter a valid option");
-                            break;
+                        int menuoption = -1;
+                        outputMenuNormalUser();
+                        Console.WriteLine("Please choose an option:");
+                        menuoption = Convert.ToInt32(Console.ReadLine());
+                        switch (menuoption)
+                        {
+                            case 1:
+                                viewClass();
+                                break;
+                            case 2:
+                                viewStudent();
+                                break;
+                            case 3:
+                                removeStudent();
+                                break;
+                            case 4:
+                                addStudent();
+                                break;
+                            case 5:
+                                addClass();
+                                break;
+                            case 6:
+                                listTeachers();
+                                break;
+                            case 7:
+                                loggedin = false;
+                                break;
+                            case 8:
+                                Console.WriteLine("Goodbye, {0}", Teachers[LoggedIndex].teacherName);
+                                System.Environment.Exit(0);
+                                break;
+                            default:
+                                Console.WriteLine("Error, please enter a valid option");
+                                break;
+                        }
                     }
-                }
-                else
-                    Console.WriteLine("Error");
-            } while (loggedin == true);
+                    else if (checkAdmin() == true)
+                    {
+                        int menuoption = -1;
+                        outputMenuAdminUser();
+                        Console.WriteLine("Please choose an option:");
+                        menuoption = Convert.ToInt32(Console.ReadLine());
+                        switch (menuoption)
+                        {
+                            case 1:
+                                viewClass();
+                                break;
+                            case 2:
+                                viewStudent();
+                                break;
+                            case 3:
+                                removeStudent();
+                                break;
+                            case 4:
+                                addStudent();
+                                break;
+                            case 5:
+                                addClass();
+                                break;
+                            case 6:
+                                addTeacher();
+                                break;
+                            case 7:
+                                removeTeacher();
+                                break;
+                            case 8:
+                                listTeachers();
+                                break;
+                            case 9:
+                                loggedin = false;
+                                break;
+                            case 10:
+                                Console.WriteLine("Goodbye, {0}", Teachers[LoggedIndex].teacherName);
+                                System.Environment.Exit(0);
+                                break;
+                            default:
+                                Console.WriteLine("Error, please enter a valid option");
+                                break;
+                        }
+                    }
+                    else
+                        Console.WriteLine("Error");
+                } while (loggedin == true);
+            } while (true);
 
 
         }
@@ -148,7 +154,8 @@ namespace Classroom_Assistant
             Console.WriteLine("4. Add Student");
             Console.WriteLine("5. Add Class");
             Console.WriteLine("6. List Teachers");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("7. Logout");
+            Console.WriteLine("8. Exit");
         }
 
         static void outputMenuAdminUser()
@@ -162,7 +169,8 @@ namespace Classroom_Assistant
             Console.WriteLine("6. Add Teacher");
             Console.WriteLine("7. Remove Teacher");
             Console.WriteLine("8. List Teachers");
-            Console.WriteLine("9. Exit");
+            Console.WriteLine("9. Logout");
+            Console.WriteLine("10. Exit");
         }
 
         static void addClass()
@@ -196,6 +204,7 @@ namespace Classroom_Assistant
 
             ClassList.Add(className);
             Classes.Add(classa);
+            Teachers[LoggedIndex].addTeacherClass(className);
 
             
         }
@@ -218,14 +227,17 @@ namespace Classroom_Assistant
                 catch { Console.WriteLine("Invalid Class Name"); }
             } while (!success);
 
-
-            //Outputs whole class
-            foreach (var item in Classes[index])
+            if (true == Teachers[LoggedIndex].accessClass(className) || Teachers[LoggedIndex].admin)
             {
-                Console.WriteLine("Name {0}", item.returnName());
-                Console.WriteLine("Age {0}", item.returnAge());
+                //Outputs whole class
+                foreach (var item in Classes[index])
+                {
+                    Console.WriteLine("Name {0}", item.returnName());
+                    Console.WriteLine("Age {0}", item.returnAge());
+                }
             }
-
+            else
+                Console.WriteLine("You do not have access to this class");
 
         }
 
@@ -253,24 +265,29 @@ namespace Classroom_Assistant
             } while (!success);
 
             index = ClassList.IndexOf(className);
-            foreach (var item in Classes[index])
+            if (true == Teachers[LoggedIndex].accessClass(className) || Teachers[LoggedIndex].admin)
             {
-                //goes through each member of the class until the correct class member is found
-                if(studentName == item.returnName())
+                foreach (var item in Classes[index])
                 {
-                    Console.WriteLine("Name: {0}", item.returnName());
-                    Console.WriteLine("Age: {0}", item.returnAge());
-                    found = true;
+                    //goes through each member of the class until the correct class member is found
+                    if (studentName == item.returnName())
+                    {
+                        Console.WriteLine("Name: {0}", item.returnName());
+                        Console.WriteLine("Age: {0}", item.returnAge());
+                        found = true;
+                    }
+                }
+
+                if (found != true)
+                {
+                    Console.WriteLine("Student can not be found. Would you like to try again? Y/N");
+                    repeat = Console.ReadLine();
+                    if (repeat == "Y")
+                        viewStudent();
                 }
             }
-
-            if(found != true)
-            {
-                Console.WriteLine("Student can not be found. Would you like to try again? Y/N");
-                repeat = Console.ReadLine();
-                if (repeat == "Y")
-                    viewStudent();
-            }
+            else
+                Console.WriteLine("You do not have access to this class");
         }
 
         static void removeStudent()
@@ -298,25 +315,30 @@ namespace Classroom_Assistant
                 catch { Console.WriteLine("Invalid Class Name"); }
             } while (!success);
 
-            foreach (var item in Classes[index])
+            if (true == Teachers[LoggedIndex].accessClass(className) || Teachers[LoggedIndex].admin)
             {
-                //student cannot be remove while in the list removed after loop has finished 
-                if(studentName == item.returnName())
+                foreach (var item in Classes[index])
                 {
-                    indexOfStudent = count;
-                    found = true;
+                    //student cannot be remove while in the list removed after loop has finished 
+                    if (studentName == item.returnName())
+                    {
+                        indexOfStudent = count;
+                        found = true;
+                    }
+                    count = count + 1;
                 }
-                count = count + 1;
+                if (found == true)
+                    Classes[index].RemoveAt(indexOfStudent);
+                else if (found != true)
+                {
+                    Console.WriteLine("Student can not be found. Would you like to try again? Y/N");
+                    repeat = Console.ReadLine();
+                    if (repeat == "Y")
+                        removeStudent();
+                }
             }
-            if (found == true)
-                Classes[index].RemoveAt(indexOfStudent);
-            else if (found != true)
-            {
-                Console.WriteLine("Student can not be found. Would you like to try again? Y/N");
-                repeat = Console.ReadLine();
-                if (repeat == "Y")
-                    removeStudent();
-            }
+            else
+                Console.WriteLine("You do not have access to this class");
         }
 
         static void addStudent()
@@ -339,12 +361,17 @@ namespace Classroom_Assistant
                 catch { Console.WriteLine("Invalid Class Name"); }
             } while (!success);
 
-            student newClassMember = new student();
-            Console.WriteLine("Please Enter the students name");
-            newClassMember.setName(Console.ReadLine());
-            Console.WriteLine("Please enter the Students Age");
-            newClassMember.setAge(Convert.ToInt32(Console.ReadLine()));
-            Classes[index].Add(newClassMember);
+            if (true == Teachers[LoggedIndex].accessClass(className) || Teachers[LoggedIndex].admin)
+            {
+                student newClassMember = new student();
+                Console.WriteLine("Please Enter the students name");
+                newClassMember.setName(Console.ReadLine());
+                Console.WriteLine("Please enter the Students Age");
+                newClassMember.setAge(Convert.ToInt32(Console.ReadLine()));
+                Classes[index].Add(newClassMember);
+            }
+            else
+                Console.WriteLine("You do not have access to this class");
 
         }
 
@@ -372,6 +399,7 @@ namespace Classroom_Assistant
             Console.WriteLine("Admin: ");
             admin = Convert.ToBoolean(Console.ReadLine());
             newMember.setupTeacher(name, username, password, admin);
+            Teachers.Add(newMember);
         }
 
         //add error handling for removing yourself

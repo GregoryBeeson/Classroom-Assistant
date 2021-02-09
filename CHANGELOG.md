@@ -1,4 +1,3 @@
-Change Log
 - Teacher accessClass added
 - viewStudent perms added
 - addClass perms added

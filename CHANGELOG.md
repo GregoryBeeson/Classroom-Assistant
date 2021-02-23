@@ -1,9 +1,7 @@
-- Teacher accessClass added
-- viewStudent perms added
-- addClass perms added
-- viewClass perms added
-- removeStudent
-- addStudent
-- added logout function
-- do statment for login
-- fixed addTeacher
+- 
+## ChangeLog
+
+- Error handling added to addClass function
+- Error handling added to addStudent function
+- Error handling added to addTeacher
+- Stopped admins from removing them self

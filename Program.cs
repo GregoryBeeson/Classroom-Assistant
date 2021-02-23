@@ -178,15 +178,19 @@ namespace Classroom_Assistant
             int classize = 1;
             string className = "";
             bool success = false;
+            bool forLoopSuccess = false;
             Console.WriteLine("Please enter Class Name");
             className = Console.ReadLine();
             Console.WriteLine("Please enter class size");
-            do { 
-                try { 
-                    classize = Convert.ToInt32(Console.ReadLine()); 
-                    success = true; 
-                } catch
-                { Console.WriteLine("Please enter a valid option"); } 
+            do
+            {
+                try
+                {
+                    classize = Convert.ToInt32(Console.ReadLine());
+                    success = true;
+                }
+                catch
+                { Console.WriteLine("Please enter a valid option"); }
             } while (!success);
 
 
@@ -198,15 +202,23 @@ namespace Classroom_Assistant
                 classa.Add(new student());
                 Console.WriteLine("Please Enter the students name");
                 classa[I].setName(Console.ReadLine());
-                Console.WriteLine("Please enter the Students Age");
-                classa[I].setAge(Convert.ToInt32(Console.ReadLine()));
+                do
+                {
+                    try
+                    {
+                        Console.WriteLine("Please enter the Students Age");
+                        classa[I].setAge(Convert.ToInt32(Console.ReadLine()));
+                        forLoopSuccess = true;
+                    }
+                    catch { Console.WriteLine("Invalid Input"); }
+                } while (!forLoopSuccess);
             }
 
             ClassList.Add(className);
             Classes.Add(classa);
             Teachers[LoggedIndex].addTeacherClass(className);
 
-            
+
         }
         static void viewClass()
         {
@@ -291,7 +303,7 @@ namespace Classroom_Assistant
         }
 
         static void removeStudent()
-        { 
+        {
             string className = "";
             string studentName = "";
             int index = -1;
@@ -347,8 +359,9 @@ namespace Classroom_Assistant
             string className = "";
             int index = 0;
             bool success = false;
+            bool forLoopSuccess = false;
 
-            
+
             do
             {
                 try
@@ -366,8 +379,15 @@ namespace Classroom_Assistant
                 student newClassMember = new student();
                 Console.WriteLine("Please Enter the students name");
                 newClassMember.setName(Console.ReadLine());
-                Console.WriteLine("Please enter the Students Age");
-                newClassMember.setAge(Convert.ToInt32(Console.ReadLine()));
+                do
+                {
+                    try
+                    {
+                        Console.WriteLine("Please enter the Students Age");
+                        newClassMember.setAge(Convert.ToInt32(Console.ReadLine()));
+                    }
+                    catch { Console.WriteLine("Invalid input"); }
+                } while (!forLoopSuccess);
                 Classes[index].Add(newClassMember);
             }
             else
@@ -389,6 +409,8 @@ namespace Classroom_Assistant
             string username = "";
             string password = "";
             bool admin = false;
+            bool success = false;
+
             Teacher newMember = new Teacher();
             Console.WriteLine("Name: ");
             name = Console.ReadLine();
@@ -396,13 +418,19 @@ namespace Classroom_Assistant
             username = Console.ReadLine();
             Console.WriteLine("Password: ");
             password = Console.ReadLine();
-            Console.WriteLine("Admin: ");
-            admin = Convert.ToBoolean(Console.ReadLine());
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Admin: ");
+                    admin = Convert.ToBoolean(Console.ReadLine());
+                }
+                catch { Console.WriteLine("Invalid Input"); }
+            } while (!success);
             newMember.setupTeacher(name, username, password, admin);
             Teachers.Add(newMember);
         }
 
-        //add error handling for removing yourself
         static void removeTeacher()
         {
             string username = "";
@@ -412,7 +440,7 @@ namespace Classroom_Assistant
 
             Console.WriteLine("Please enter username");
             username = Console.ReadLine();
-            for(int I = 0; Teachers.Count() > I; I++)
+            for (int I = 0; Teachers.Count() > I; I++)
             {
                 Console.WriteLine(Teachers[I].username);
                 if (username == Teachers[I].username)
@@ -422,12 +450,12 @@ namespace Classroom_Assistant
                 }
             }
 
-            if (found == true)
+            if (found == true && username != Teachers[removeIndex].username)
             {
                 Teachers.RemoveAt(removeIndex);
-                if(LoggedIndex > 0)
+                if (LoggedIndex > 0)
                     LoggedIndex = LoggedIndex - 1;
-               
+
             }
 
             else if (found != true)
@@ -437,11 +465,14 @@ namespace Classroom_Assistant
                 if (repeat == "Y")
                     removeTeacher();
             }
+
+            else if (username == Teachers[removeIndex].username)
+                Console.WriteLine("You cannot remove yourself");
         }
 
         static void listTeachers()
         {
-            foreach(var item in Teachers)
+            foreach (var item in Teachers)
             {
                 Console.WriteLine("Name: {0}\nUsername: {1} ", item.teacherName, item.username);
             }

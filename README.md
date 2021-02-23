@@ -10,6 +10,6 @@ on what I have updated on each post on my [webiste](https://gbeeson.dev) on the 
 ---
 
 ## Authors
-![Gregory Beeson](https://gitlab.com/GregoryBeeson) - All Code
+[Gregory Beeson](https://gitlab.com/GregoryBeeson) - All Code
 
-![George Wood](https://gitlab.com/gwo0d) - Support In Certain Features
+[George Wood](https://gitlab.com/gwo0d) - Support In Certain Features

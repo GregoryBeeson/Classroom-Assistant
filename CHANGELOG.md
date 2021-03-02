@@ -1,4 +1,4 @@
-- 
+![Gbeeson Logo](misc/current_website.gif) 
 ## ChangeLog
 
 - Error handling added to addClass function
